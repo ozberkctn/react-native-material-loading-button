@@ -45,8 +45,8 @@ export default class MaterialButton extends PureComponent {
   }
 
   renderText() {
-    if (this.props.isLoading && this.props.loadingText) {
-      return <Text style={this.getTextStyle()}>{this.props.loadingText.toUpperCase()}</Text>;
+    if (this.props.isLoading) {
+      return <Text style={this.getTextStyle()}></Text>;
     }
     return <Text style={this.getTextStyle()}>{this.props.text.toUpperCase()}</Text>;
   }
