@@ -24,17 +24,6 @@ export default styles = StyleSheet.create({
     alignItems: 'center'
   },
   raised: {
-    ...Platform.select({
-      ios: {
-        shadowOffset: { width: 0, height: 2 },
-        shadowColor: '#000000',
-        shadowOpacity: 0.3,
-        shadowRadius: 2
-      },
-      android: {
-        elevation: 2
-      }
-    })
   },
   loading: {
     
