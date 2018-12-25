@@ -17,7 +17,7 @@ export default class MaterialButton extends PureComponent {
         return [styles.btn, { opacity: opacity }, this.props.style];
 
       case !this.props.flat && !disabled:
-        return [styles.btn, styles.raised, { backgroundColor: this.props.color }, this.props.style];
+        return [styles.btn, this.props.style];
 
       case !this.props.flat && disabled:
         return [styles.btn, styles.raised, { backgroundColor: this.props.color, opacity: opacity }, this.props.style];
