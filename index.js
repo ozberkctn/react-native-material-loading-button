@@ -64,17 +64,7 @@ export default class MaterialButton extends PureComponent {
 
 }
 
-MaterialButton.propTypes = {
-  flat: PropTypes.bool,
-  text: PropTypes.string,
-  color: PropTypes.string,
-  onPress: PropTypes.func,
-  style: PropTypes.number || PropTypes.object,
-  textStyle: PropTypes.number || PropTypes.object,
-  disabled: PropTypes.bool,
-  isLoading: PropTypes.bool,
-  loadingText: PropTypes.string
-};
+
 
 MaterialButton.defaultProps = {
   flat: false,
