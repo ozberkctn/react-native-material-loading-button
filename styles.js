@@ -15,7 +15,6 @@ export default styles = StyleSheet.create({
     marginLeft: 6
   },
   btn: {
-    minWidth: 76,
     minHeight: 36,
     paddingHorizontal: 16,
     borderRadius: 2,
