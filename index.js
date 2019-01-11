@@ -71,7 +71,7 @@ export default class MaterialButton extends PureComponent {
     return (
       <View style={{ width: this.props.style.width, alignItems: "flex-end" }}>
         <TouchableOpacity
-          disabled={this.props.disabled}
+          disabled={this.props.disabled || this.props.isLoading}
           onPress={this.props.onPress}
           style={{ width: this.props.style.width }}
         >
