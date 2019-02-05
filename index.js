@@ -4,7 +4,8 @@ import {
   View,
   Text,
   StyleSheet,
-  ActivityIndicator
+  ActivityIndicator,
+  Platform
 } from "react-native";
 import Ripple from "react-native-material-ripple";
 import PropTypes from "prop-types";
@@ -66,11 +67,18 @@ export default class MaterialButton extends PureComponent {
       <Text style={this.getTextStyle()}>{this.props.text.toUpperCase()}</Text>
     );
   }
+  
+  getPlatformTestId (id) => Platform.OS === 'ios' ? {testID: id} : {accessible: true, accessibilityLabel: id};
+
+  setTestID(id) => __DEV__ ? getPlatformTestId(id) : null;
 
   render() {
+    const { accessibilityLabel } = this.props;
     return (
       <View style={{ width: this.props.style.width, alignItems: "flex-end" }}>
         <TouchableOpacity
+         {...setTestID(accessibilityLabel)}
+          accessible={true}
           disabled={this.props.disabled || this.props.isLoading}
           onPress={this.props.onPress}
           style={{ width: this.props.style.width }}
@@ -91,5 +99,6 @@ MaterialButton.defaultProps = {
   color: "#039be5",
   disabled: false,
   isLoading: false,
-  loadingText: ""
+  loadingText: "",
+  accessibilityLabel:""
 };
