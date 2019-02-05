@@ -68,9 +68,15 @@ export default class MaterialButton extends PureComponent {
     );
   }
   
-  getPlatformTestId (id) => Platform.OS === 'ios' ? {testID: id} : {accessible: true, accessibilityLabel: id};
+  getPlatformTestId(id) {
+    Platform.OS === "ios"
+      ? { testID: id }
+      : { accessible: true, accessibilityLabel: id };
+  }
 
-  setTestID(id) => __DEV__ ? getPlatformTestId(id) : null;
+  setTestID(id) {
+    __DEV__ ? getPlatformTestId(id) : null;
+  }
 
   render() {
     const { accessibilityLabel } = this.props;
