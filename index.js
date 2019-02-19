@@ -75,7 +75,7 @@ export default class MaterialButton extends PureComponent {
   }
 
   setTestID(id) {
-    __DEV__ ? getPlatformTestId(id) : null;
+    __DEV__ ? this.getPlatformTestId(id) : null;
   }
 
   render() {
