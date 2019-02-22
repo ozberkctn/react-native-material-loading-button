@@ -10,8 +10,15 @@ import {
 import Ripple from "react-native-material-ripple";
 import PropTypes from "prop-types";
 import styles from "./styles";
+import * as Animatable from "react-native-animatable";
 
 export default class MaterialButton extends PureComponent {
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (this.props.text != nextProps.text && this.props.text != "") {
+      this.view.transitionTo({ opacity: 0 }, 500);
+      this.view.transitionTo({ opacity: 1 }, 500);
+    }
+  }
   getButtonStyle() {
     let disabled = this.props.disabled || this.props.isLoading;
     let opacity = this.props.isLoading ? 0.6 : 0.3;
@@ -59,15 +66,19 @@ export default class MaterialButton extends PureComponent {
     return null;
   }
 
+  handleViewRef = ref => (this.view = ref);
+
   renderText() {
     if (this.props.isLoading) {
       return <Text style={this.getTextStyle()} />;
     }
     return (
-      <Text style={this.getTextStyle()}>{this.props.text.toUpperCase()}</Text>
+      <Animatable.Text style={this.getTextStyle()} ref={this.handleViewRef}>
+        {this.props.text.toUpperCase()}
+      </Animatable.Text>
     );
   }
-  
+
   getPlatformTestId(id) {
     Platform.OS === "ios"
       ? { testID: id }
@@ -83,7 +94,7 @@ export default class MaterialButton extends PureComponent {
     return (
       <View style={{ width: this.props.style.width, alignItems: "flex-end" }}>
         <TouchableOpacity
-         {...this.setTestID(accessibilityLabel)}
+          {...this.setTestID(accessibilityLabel)}
           disabled={this.props.disabled || this.props.isLoading}
           onPress={this.props.onPress}
           style={{ width: this.props.style.width }}
@@ -105,5 +116,5 @@ MaterialButton.defaultProps = {
   disabled: false,
   isLoading: false,
   loadingText: "",
-  accessibilityLabel:""
+  accessibilityLabel: ""
 };
