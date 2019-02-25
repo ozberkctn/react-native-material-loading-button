@@ -11,14 +11,14 @@ import Ripple from "react-native-material-ripple";
 import PropTypes from "prop-types";
 import styles from "./styles";
 import * as Animatable from "react-native-animatable";
+import MaterialButtonText from "react-native-material-loading-button/MaterialButtonText";
 
 export default class MaterialButton extends PureComponent {
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (this.props.text != nextProps.text && this.props.text != "") {
-      this.view.transitionTo({ opacity: 0 }, 500);
-      this.view.transitionTo({ opacity: 1 }, 500);
-    }
+  constructor(props) {
+    super(props);
   }
+  UNSAFE_componentWillReceiveProps(nextProps) {}
+
   getButtonStyle() {
     let disabled = this.props.disabled || this.props.isLoading;
     let opacity = this.props.isLoading ? 0.6 : 0.3;
@@ -42,41 +42,12 @@ export default class MaterialButton extends PureComponent {
     }
   }
 
-  getTextStyle() {
-    let defaultStyle = [styles.text];
-    if (this.props.isLoading) {
-      defaultStyle.push(styles.loadingText);
-    }
-    if (this.props.flat) {
-      return [
-        ...defaultStyle,
-        { color: this.props.color },
-        this.props.textStyle
-      ];
-    } else {
-      return [...defaultStyle, this.props.textStyle];
-    }
-  }
-
   renderLoadingAnim() {
     if (this.props.isLoading) {
       let color = this.props.flat ? this.props.color : "#ffffff";
       return <ActivityIndicator color={color} style={styles.loading} />;
     }
     return null;
-  }
-
-  handleViewRef = ref => (this.view = ref);
-
-  renderText() {
-    if (this.props.isLoading) {
-      return <Text style={this.getTextStyle()} />;
-    }
-    return (
-      <Animatable.Text style={this.getTextStyle()} ref={this.handleViewRef}>
-        {this.props.text.toUpperCase()}
-      </Animatable.Text>
-    );
   }
 
   getPlatformTestId(id) {
@@ -101,7 +72,12 @@ export default class MaterialButton extends PureComponent {
         >
           <View style={this.getButtonStyle()}>
             {this.renderLoadingAnim()}
-            {this.renderText()}
+            <MaterialButtonText
+              isLoading={this.props.isLoading}
+              textStyle={this.props.textStyle}
+              text={this.props.text}
+              color={this.props.color}
+            />
           </View>
         </TouchableOpacity>
       </View>
@@ -118,3 +94,4 @@ MaterialButton.defaultProps = {
   loadingText: "",
   accessibilityLabel: ""
 };
+
