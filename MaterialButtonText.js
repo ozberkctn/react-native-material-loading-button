@@ -3,7 +3,13 @@ import { Text, Animated, View } from "react-native";
 import * as Animatable from "react-native-animatable";
 import styles from "./styles";
 class MaterialButtonText extends Component {
-  state = { fadeAnim: new Animated.Value(1), fadeAnim2: new Animated.Value(0) };
+  constructor(props) {
+    super(props);
+    this.state = {
+      fadeAnim: new Animated.Value(props.text == "Next" ? 1 : 0),
+      fadeAnim2: new Animated.Value(props.text == "Next" ? 0 : 1)
+    };
+  }
   shouldComponentUpdate(nextProps, nextState) {
     if (this.props.text != nextProps.text && this.props.text != "") {
       if (nextProps.text == "Complete") {
@@ -54,6 +60,7 @@ class MaterialButtonText extends Component {
     if (this.props.isLoading) {
       return <Text style={this.getTextStyle()} />;
     }
+
     return (
       <View>
         {this.props.text == "Next" ? (
@@ -61,14 +68,14 @@ class MaterialButtonText extends Component {
             style={[this.getTextStyle(), { opacity: this.state.fadeAnim }]}
             ref={this.handleViewRef}
           >
-            Next
+            {this.props.text}
           </Animated.Text>
         ) : (
           <Animated.Text
             style={[this.getTextStyle(), { opacity: this.state.fadeAnim2 }]}
             ref={this.handleViewRef}
           >
-            Complete
+            {this.props.text}
           </Animated.Text>
         )}
       </View>
