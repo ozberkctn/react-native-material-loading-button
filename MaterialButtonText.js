@@ -5,6 +5,7 @@ import styles from "./styles";
 class MaterialButtonText extends Component {
   constructor(props) {
     super(props);
+    debugger;
     this.state = {
       fadeAnim: new Animated.Value(props.text == "Next" ? 1 : 0),
       fadeAnim2: new Animated.Value(props.text == "Next" ? 0 : 1)
@@ -12,6 +13,7 @@ class MaterialButtonText extends Component {
   }
   shouldComponentUpdate(nextProps, nextState) {
     if (this.props.text != nextProps.text && this.props.text != "") {
+      debugger;
       if (nextProps.text == "Complete") {
         this.setState({ fadeAnim: new Animated.Value(0) });
         Animated.timing(
@@ -24,6 +26,7 @@ class MaterialButtonText extends Component {
           }
         ).start();
       } else {
+        this.setState({ fadeAnim2: new Animated.Value(0) });
         Animated.timing(
           // Animate value over time
           this.state.fadeAnim, // The value to drive
@@ -33,8 +36,6 @@ class MaterialButtonText extends Component {
             useNativeDriver: true
           }
         ).start();
-
-        this.setState({ fadeAnim2: new Animated.Value(0) });
       }
     }
 
@@ -57,9 +58,7 @@ class MaterialButtonText extends Component {
   }
   handleViewRef = ref => (this.view = ref);
   render() {
-    if (this.props.isLoading) {
-      return <Text style={this.getTextStyle()} />;
-    }
+    debugger;
 
     return (
       <View>
@@ -68,14 +67,14 @@ class MaterialButtonText extends Component {
             style={[this.getTextStyle(), { opacity: this.state.fadeAnim }]}
             ref={this.handleViewRef}
           >
-            {this.props.text}
+            {this.props.isLoading ? "" : this.props.text}
           </Animated.Text>
         ) : (
           <Animated.Text
             style={[this.getTextStyle(), { opacity: this.state.fadeAnim2 }]}
             ref={this.handleViewRef}
           >
-            {this.props.text}
+            {this.props.isLoading ? "" : this.props.text}
           </Animated.Text>
         )}
       </View>
