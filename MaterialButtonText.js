@@ -7,14 +7,14 @@ class MaterialButtonText extends Component {
     super(props);
     debugger;
     this.state = {
-      fadeAnim: new Animated.Value(props.text == "Next" ? 1 : 0),
-      fadeAnim2: new Animated.Value(props.text == "Next" ? 0 : 1)
+      fadeAnim: new Animated.Value(props.next ? 1 : 0),
+      fadeAnim2: new Animated.Value(props.next ? 0 : 1)
     };
   }
   shouldComponentUpdate(nextProps, nextState) {
     if (this.props.text != nextProps.text && this.props.text != "") {
       debugger;
-      if (nextProps.text == "Complete") {
+      if (!nextProps.next) {
         this.setState({ fadeAnim: new Animated.Value(0) });
         Animated.timing(
           // Animate value over time
@@ -62,7 +62,7 @@ class MaterialButtonText extends Component {
 
     return (
       <View>
-        {this.props.text == "Next" ? (
+        {this.props.next ? (
           <Animated.Text
             style={[this.getTextStyle(), { opacity: this.state.fadeAnim }]}
             ref={this.handleViewRef}
