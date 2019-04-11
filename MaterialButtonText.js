@@ -5,7 +5,6 @@ import styles from "./styles";
 class MaterialButtonText extends Component {
   constructor(props) {
     super(props);
-    debugger;
     this.state = {
       fadeAnim: new Animated.Value(props.next ? 1 : 0),
       fadeAnim2: new Animated.Value(props.next ? 0 : 1)
@@ -13,7 +12,6 @@ class MaterialButtonText extends Component {
   }
   shouldComponentUpdate(nextProps, nextState) {
     if (this.props.text != nextProps.text && this.props.text != "") {
-      debugger;
       if (!nextProps.next) {
         this.setState({ fadeAnim: new Animated.Value(0) });
         Animated.timing(
@@ -58,8 +56,6 @@ class MaterialButtonText extends Component {
   }
   handleViewRef = ref => (this.view = ref);
   render() {
-    debugger;
-
     return (
       <View>
         {this.props.next ? (
