@@ -21,7 +21,7 @@ export default class MaterialButton extends PureComponent {
 
   getButtonStyle() {
     let disabled = this.props.disabled || this.props.isLoading;
-    let opacity = this.props.isLoading ? 0.6 : 0.3;
+    let opacity = this.props.isLoading ? 1 : 0.3;
     switch (true) {
       case this.props.flat && !disabled:
         return [styles.btn, this.props.style];
@@ -94,4 +94,3 @@ MaterialButton.defaultProps = {
   loadingText: "",
   accessibilityLabel: ""
 };
-
